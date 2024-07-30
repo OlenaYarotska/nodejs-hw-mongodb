@@ -7,6 +7,7 @@ import { env } from './utils/env.js';
 import { notFoundHandler } from './middlewars/notFoundHandler.js';
 import { errorHandler } from './middlewars/errorHandler.js';
 
+
 dotenv.config();
 
  export function setupServer() {
