@@ -2,7 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from "dotenv";
 import pino from 'pino-http';
-import contactsRouter from './routers/contacts.js';
+import cookieParser from 'cookie-parser';
+import router from './routers/index.js';
 import { env } from './utils/env.js';
 import { notFoundHandler } from './middlewars/notFoundHandler.js';
 import { errorHandler } from './middlewars/errorHandler.js';
@@ -20,7 +21,8 @@ dotenv.config();
     type: ['application/json', 'application/vnd.api+json'],
     limit: '100kb',
   }),
-  );
+   );
+   app.use(cookieParser());
 
     app.use(
     pino({
@@ -30,7 +32,7 @@ dotenv.config();
     }),
     );
 
-   app.use(contactsRouter);
+   app.use(router);
    app.use('*', notFoundHandler);
    app.use(errorHandler);
 
