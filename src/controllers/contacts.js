@@ -48,7 +48,18 @@ export const getContactsByIdController = async (req, res, next) => {
 };
 
 export const createContactsController = async (req, res, next) => {
-    const newContact = { ...req.body, userId: req.user._id,};
+     const photo = req.file;
+    let photoUrl;
+
+
+  if (photo) {
+    if (env('ENABLE_CLOUDINARY') === 'true') {
+      photoUrl = await saveFileToCloudinary(photo);
+    } else {
+      photoUrl = await saveFileToUploadDir(photo);
+    }
+  }
+    const newContact = { ...req.body, userId: req.user._id, photo: photoUrl,};
     const contact = await createContact(newContact);
 
 
@@ -58,6 +69,7 @@ export const createContactsController = async (req, res, next) => {
         data: contact,
     });
 };
+
 export const deleteContactsController = async (req, res, next) => {
     const { contactId } = req.params;
     const contact = await deleteContact(contactId, req.user._id);

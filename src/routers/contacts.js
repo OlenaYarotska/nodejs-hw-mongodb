@@ -13,7 +13,7 @@ const router = Router();
 router.use(authenticate);
 router.get('/', ctrlWrapper(getContactsController));
 router.get('/:contactId', isValidId, ctrlWrapper(getContactsByIdController));
-router.post('/', validateBody(createContactsSchema), upload.single('photo'), ctrlWrapper(createContactsController));
+router.post('/', upload.single('photo'), validateBody(createContactsSchema), ctrlWrapper(createContactsController));
 router.delete('/:contactId', isValidId, ctrlWrapper(deleteContactsController));
 router.patch('/:contactId', isValidId, upload.single('photo'), validateBody(updateContactsSchema), ctrlWrapper(patchContactsController));
 
