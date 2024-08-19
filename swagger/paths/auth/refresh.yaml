@@ -1,0 +1,76 @@
+tags:
+  - Auth
+summary: Refresh user session
+operationId: refreshUser
+description: 'Refresh the user session'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          sessionId:
+            type: string
+          refreshToken:
+            type: string
+        required:
+          - sessionId
+          - refreshToken
+responses:
+  '200':
+    description: Successfully refreshed session!
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            accessToken:
+              type: string
+          required:
+            - accessToken
+
+  '400':
+    description: Bad request
+  '401':
+    description: Unauthorized
+# tags:
+#   - Auth
+# summary: Refresh user session
+# operationId: refreshUser
+# description: 'Refresh the user session'
+# security:
+#   - bearerAuth: []
+# requestBody:
+#   required: true
+#   content:
+#     application/json:
+#       schema:
+#         type: object
+#         properties:
+#           sessionId:
+#             type: string
+#           refreshToken:
+#             type: string
+#         required:
+#           - sessionId
+#           - refreshToken
+# responses:
+#   '200':
+#     description: Successfully refreshed session!
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#           properties:
+#             accessToken:
+#               type: string
+#           required:
+#             - accessToken
+
+#   '400':
+#     description: Bad request
+#   '401':
+#     description: Unauthorized

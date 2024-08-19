@@ -1,0 +1,26 @@
+tags:
+  - Auth
+summary: Send an email with request to reset password
+operationId: requestResetEmail
+description: 'Send an email with request to reset password'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          email:
+            type: string
+            format: email
+        required:
+          - email
+responses:
+  '200':
+    description: Email with request to reset password was successfully sent
+  '400':
+    description: Bad request
+  '404':
+    description: User is not found

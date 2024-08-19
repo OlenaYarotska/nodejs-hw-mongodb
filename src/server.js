@@ -8,6 +8,7 @@ import { env } from './utils/env.js';
 import { notFoundHandler } from './middlewars/notFoundHandler.js';
 import { errorHandler } from './middlewars/errorHandler.js';
 import { UPLOAD_DIR } from './constants/index.js';
+import { swaggerDocs } from './middlewars/swaggerDocs.js';
 
 
 dotenv.config();
@@ -33,10 +34,13 @@ dotenv.config();
     }),
     );
 
-   app.use(router);
-   app.use('*', notFoundHandler);
-   app.use(errorHandler);
+  app.use(router);
   app.use('/uploads', express.static(UPLOAD_DIR));
+  app.use('/api-docs', swaggerDocs());
+  app.use('*', notFoundHandler);
+  app.use(errorHandler);
+
+
 
     app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

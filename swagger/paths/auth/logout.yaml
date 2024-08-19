@@ -1,0 +1,12 @@
+tags:
+  - Auth
+summary: Logout user
+operationId: logoutUser
+description: 'Logout user'
+security:
+  - bearerAuth: []
+responses:
+  '204':
+    description: Sucessfully logged out!
+  '400':
+    description: Bad request
